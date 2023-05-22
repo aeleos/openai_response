@@ -90,26 +90,8 @@ You can also use a service call to send a request:
 service: openai_response.openai_input
 data:
   prompt: Tell a joke
-  mood: You are a joker     # Optional, will use the configured or default mood if not specified
-  model: gpt-3.5-turbo      # Optional, will use the configured or default model if not specified
+  model: gpt4hassio      # Optional, will use the configured or default model if not specified
 ```
-
-## Example
-To display the GPT-3 input and response in your Home Assistant frontend, add the following to your **ui-lovelace.yaml** file or create a card in the Lovelace UI:
-
-```yaml
-type: grid
-square: false
-columns: 1
-cards:
-  - type: entities
-    entities:
-      - entity: input_text.gpt_input
-  - type: markdown
-    content: '{{ state_attr(''sensor.hassio_openai_response'', ''response_text'') }}'
-    title: ChatGPT Response
-```
-Now you can type your text in the GPT-3 Input field, and the generated response will be displayed in the response card.
 
 <img src="https://github.com/Hassassistant/OpenMindsAI/blob/main/misc/card.PNG?raw=true"
      width="50%" />
