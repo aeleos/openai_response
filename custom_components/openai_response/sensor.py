@@ -61,17 +61,6 @@ async def async_setup_platform(
     )
     return True
 
-
-# def generate_openai_response_sync(model: str, prompt: str, mood: str):
-#     """Do the real OpenAI request"""
-#     _LOGGER.debug("Model: %s, Mood: %s, Prompt: %s", model, mood, prompt)
-#     return openai.ChatCompletion.create(
-#         model=model,
-#         messages=[
-#             {"role": "system", "content": mood},
-#             {"role": "user", "content": prompt},
-#         ],
-#     )
 def query_message(query, token_budget=4096 - 500):
     return query
 
@@ -139,14 +128,6 @@ class OpenAIResponseSensor(SensorEntity):
                 new_text,
             )
             self.response_received(response)
-
-    # async def async_added_to_hass(self):
-    #     """Added to hass"""
-    #     self.async_on_remove(
-    #         self._hass.helpers.event.async_track_state_change(
-    #             "input_text.gpt_input", self.async_generate_openai_response
-    #         )
-    #     )
 
     async def async_update(self):
         """Ignore other updates"""
