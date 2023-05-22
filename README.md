@@ -41,11 +41,12 @@ This will create your model.
 - Click the Network tab (Step 1).
 - Refresh the webpage (F5)
 - Look for the Home element (Step 2).
-- Click on the cookies tab (Step 3)
-- Copy the Session Cookie by double clicking the string, right click and press copy. (Step 4)
+- Find the home source in the network tab
+- Right click on home, select Copy -> Copy as cURL (cmd or bash)
+- Paste the resulting command into a text editor and locate the 'session=' parameter
+- Copy the session cookie, excluding the trailing " or '
+- Paste this into the configuration
 ![enter image description here](https://github.com/Hassassistant/OpenMindsAI/blob/main/misc/cookie.png?raw=true)
-
-
 
 
 
