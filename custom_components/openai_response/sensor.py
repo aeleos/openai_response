@@ -6,8 +6,7 @@ from homeassistant.const import CONF_API_KEY, CONF_NAME
 import homeassistant.helpers.config_validation as cv
 from homeassistant.core import HomeAssistant, callback
 import logging
-
-
+import json 
 _LOGGER = logging.getLogger(__name__)
 
 ATTR_MODEL = "model"
@@ -87,7 +86,7 @@ class OpenAIResponseSensor(SensorEntity):
         self._model = model
         self._prompt = None
         self._attr_native_value = None
-        self._response_text = ""
+        self._response_object = {}
         self._session_cookie = session_cookie
     @property
     def name(self):
@@ -96,7 +95,7 @@ class OpenAIResponseSensor(SensorEntity):
     @property
     def extra_state_attributes(self):
         return {
-            "response_text": self._response_text,
+            "response_object": self._response_object,
             "prompt": self._prompt,
             "model": self._model,
         }
@@ -105,13 +104,13 @@ class OpenAIResponseSensor(SensorEntity):
         """Staring a new request"""
         self._model = model
         self._prompt = prompt
-        self._response_text = ""
+        self._response_object = {}
         self._attr_native_value = "requesting"
         self.async_write_ha_state()
 
     def response_received(self, response_text):
         """Updating the sensor state"""
-        self._response_text = response_text
+        self._response_object = json.loads(response_text)
         self._attr_native_value = "response_received"
         self.async_write_ha_state()
 
